@@ -7,6 +7,7 @@ import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
+import { getLoginUserUsingGet } from './services/mybi/userController';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -14,20 +15,18 @@ const loginPath = '/user/login';
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<{
-  settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
-  loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  
+  currentUser?: API.LoginUserVO;
+  
+  // fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
-      });
-      return msg.data;
+      const res = await getLoginUserUsingGet();
+      return res.data;
     } catch (error) {
       history.push(loginPath);
-    }
+    }   
     return undefined;
   };
   // 如果不是登录页面，执行
@@ -35,14 +34,13 @@ export async function getInitialState(): Promise<{
   if (location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
     return {
-      fetchUserInfo,
+      
       currentUser,
-      settings: defaultSettings as Partial<LayoutSettings>,
+      
     };
   }
   return {
-    fetchUserInfo,
-    settings: defaultSettings as Partial<LayoutSettings>,
+   
   };
 }
 
@@ -51,7 +49,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
   return {
     actionsRender: () => [<Question key="doc" />],
     avatarProps: {
-      src: initialState?.currentUser?.avatar,
+      src: initialState?.currentUser?.userAvatar,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
@@ -131,5 +129,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const request = {
+  baseURL:"http://localhost:8080",
+  withCredentials:true,
   ...errorConfig,
 };
