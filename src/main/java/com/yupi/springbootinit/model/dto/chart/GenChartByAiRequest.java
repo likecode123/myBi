@@ -1,21 +1,21 @@
-package com.yupi.springbootinit.model.dto.postfavour;
+package com.yupi.springbootinit.model.dto.file;
 
 import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 帖子收藏 / 取消收藏请求
+ * 文件上传请求
  *
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Data
-public class PostFavourAddRequest implements Serializable {
+public class UploadFileRequest implements Serializable {
 
     /**
-     * 帖子 id
+     * 业务
      */
-    private Long postId;
+    private String biz;
 
     private static final long serialVersionUID = 1L;
 }

@@ -1,54 +1,65 @@
-package com.yupi.springbootinit.model.entity;
+package generator.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 帖子
- *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
+ * 图表信息表
+ * @TableName chart
  */
-@TableName(value = "post")
+@TableName(value ="chart")
 @Data
-public class Post implements Serializable {
-
+public class Chart implements Serializable {
     /**
      * id
      */
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 标题
+     * 分析目标
      */
-    private String title;
+    private String goal;
 
     /**
-     * 内容
+     * 图表名称
      */
-    private String content;
+    private String name;
 
     /**
-     * 标签列表 json
+     * 图表数据
      */
-    private String tags;
+    private String chartData;
 
     /**
-     * 点赞数
+     * 图表类型
      */
-    private Integer thumbNum;
+    private String chartType;
 
     /**
-     * 收藏数
+     * 生成的图表数据
      */
-    private Integer favourNum;
+    private String genChart;
+
+    /**
+     * 生成的分析结论
+     */
+    private String genResult;
+
+    /**
+     * wait,running,succeed,failed
+     */
+    private String status;
+
+    /**
+     * 执行信息
+     */
+    private String execMessage;
 
     /**
      * 创建用户 id
@@ -68,7 +79,6 @@ public class Post implements Serializable {
     /**
      * 是否删除
      */
-    @TableLogic
     private Integer isDelete;
 
     @TableField(exist = false)
