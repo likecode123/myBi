@@ -1,7 +1,12 @@
-package com.yupi.springbootinit.model.dto.post;
+package com.yupi.springbootinit.model.dto.chart;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.yupi.springbootinit.common.PageRequest;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,52 +19,32 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PostQueryRequest extends PageRequest implements Serializable {
-
+public class ChartQueryRequest extends PageRequest implements Serializable {
     /**
      * id
      */
     private Long id;
-
     /**
-     * id
+     * 分析目标
      */
-    private Long notId;
-
+    private String goal;
     /**
-     * 搜索词
+     * 图标名称
      */
-    private String searchText;
-
+    private  String name;
     /**
-     * 标题
+     * 图表数据
      */
-    private String title;
-
+    private String chartData;
     /**
-     * 内容
+     * 图表类型
      */
-    private String content;
-
-    /**
-     * 标签列表
-     */
-    private List<String> tags;
-
-    /**
-     * 至少有一个标签
-     */
-    private List<String> orTags;
-
+    private String chartType;
     /**
      * 创建用户 id
      */
     private Long userId;
 
-    /**
-     * 收藏用户 id
-     */
-    private Long favourUserId;
 
     private static final long serialVersionUID = 1L;
 }
