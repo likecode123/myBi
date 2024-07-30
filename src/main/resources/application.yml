@@ -21,17 +21,22 @@ spring:
   # todo 需替换配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://212.64.22.193:3306/mybi?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://***.64.22.***:3306/mybi?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: UNLOCK110
+    password: ***
   # Redis 配置
   # todo 需替换配置，然后取消注释
   redis:
     database: 4
-    host: 212.64.22.193
+    host: ***
     port: 6379
     timeout: 5000
     password: UNLOCK110
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   # Elasticsearch 配置
   # todo 需替换配置，然后取消注释
 #  elasticsearch:
