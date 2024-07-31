@@ -1,5 +1,5 @@
 
-import { genChartByAiUsingPost  } from '@/services/mybi/chartController';
+import { genChartByAiAsyncMqUsingPost, genChartByAiUsingPost  } from '@/services/mybi/chartController';
 
 import React, { useState } from 'react';
 
@@ -30,7 +30,8 @@ const [submitting, setSubmitting] = useState<boolean>(false);
     };
     try {
       // 需要取到上传的原始数据file→file→originFileObj(原始数据)
-      const res = await genChartByAiAsyncUsingPost(params, {}, values.file.file.originFileObj);
+      const res = await genChartByAiAsyncMqUsingPost(params, {}, values.file.file.originFileObj);
+      // const res = await genChartByAiAsyncUsingPost(params, {}, values.file.file.originFileObj);
       // 正常情况下，如果没有返回值就分析失败，有，就分析成功
       if (!res?.data) {
         message.error('分析失败');
